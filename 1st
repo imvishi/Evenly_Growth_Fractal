@@ -1,0 +1,54 @@
+import threading 
+import turtle
+class mythread(threading.Thread):
+    def __init__(self,x,y,t):
+        threading.Thread.__init__(self)
+        self.x=x;
+        self.y=y;
+        self.t=t
+    def run(self):
+        square(self.x,self.y,self.t);
+def side(x,t):
+    threadLock.acquire()
+    t.forward(x)
+    t.left(90)
+    threadLock.release()
+    if x>10:
+        threadLock.acquire()
+        t2=turtle.Turtle()
+        t2.speed(4)
+        t2.penup()
+        t2.setpos(t.position())
+        t2.setheading(t.heading())
+        t2.pendown()
+        t3=mythread(x/3,3,t2)
+        t3.start()
+        threadLock.release()
+    threadLock.acquire()
+    t.forward(x)
+    t.right(90)
+    threadLock.release()
+    threadLock.acquire()
+    t.forward(x)
+    t.right(90)
+    threadLock.release()
+    threadLock.acquire()
+    t.forward(x)
+    t.left(90)
+    threadLock.release()
+    threadLock.acquire()
+    t.forward(x)
+    t.right(90)
+    threadLock.release()
+def square(x,y,t):
+    while y>0:
+        side(x,t)
+        y=y-1
+threadLock=threading.Lock()
+t=turtle.Turtle()
+t.speed(4)
+t.penup()
+t.setpos(-90.00,90.00)
+t.pendown()
+square(90,4,t)
+
